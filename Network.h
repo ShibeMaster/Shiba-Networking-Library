@@ -6,10 +6,10 @@ namespace ShibaNetLib {
 		netstate_connected,
 		netstate_failed
 	};
-	class NetworkStats {
+	class Network {
 	public:
 		static int clientCount;
 		static NetworkState state;
-		static NetworkConnection* conn;
+		static NetworkConnection conn;
 	};
 }

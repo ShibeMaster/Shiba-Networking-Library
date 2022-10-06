@@ -39,12 +39,6 @@
     <ClInclude Include="NetworkBehaviour.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ClientConnection.h">
-      <Filter>Header Files\Connection</Filter>
-    </ClInclude>
-    <ClInclude Include="HostConnection.h">
-      <Filter>Header Files\Connection</Filter>
-    </ClInclude>
     <ClInclude Include="NetworkConnection.h">
       <Filter>Header Files\Connection</Filter>
     </ClInclude>
@@ -57,13 +51,10 @@
     <ClInclude Include="NetworkChannelManager.h">
       <Filter>Header Files\Channels\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="ClientConnectionChannel.h">
-      <Filter>Header Files\Channels\Default Channels</Filter>
-    </ClInclude>
     <ClInclude Include="NetworkMessage.h">
       <Filter>Header Files\Channels\Messages</Filter>
     </ClInclude>
-    <ClInclude Include="NetworkStats.h">
+    <ClInclude Include="Network.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NetworkDataQueues.h">
@@ -72,15 +63,15 @@
     <ClInclude Include="ChannelCreationQueue.h">
       <Filter>Header Files\Channels\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="DefaultNetworkChannels.h">
+      <Filter>Header Files\Channels\Default Channels</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NetworkManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ClientConnection.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HostConnection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NetworkConnection.cpp">
@@ -89,7 +80,7 @@
     <ClCompile Include="NetworkChannelManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NetworkStats.cpp">
+    <ClCompile Include="Network.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NetworkDataQueue.cpp">

@@ -2,7 +2,7 @@
 #include "NetworkChannel.h"
 #include <map>
 #include <thread>
-#include "ClientConnectionChannel.h"
+#include "DefaultNetworkChannels.h"
 #include "ChannelCreationQueue.h"
 
 namespace ShibaNetLib {
@@ -40,6 +40,7 @@ namespace ShibaNetLib {
 						std::cout << "received invalid channel id: " << message->channelid << std::endl;
 						return;
 					}
+
 					channels[message->channelid]->Incoming(data);
 					NetworkDataQueues::dataQueue.pop();
 				}

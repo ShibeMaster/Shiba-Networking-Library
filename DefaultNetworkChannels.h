@@ -1,7 +1,7 @@
 #pragma once
 #include "NetworkChannel.h"
 #include "NetworkMessage.h"
-#include "NetworkStats.h"
+#include "Network.h"
 
 namespace ShibaNetLib {
 
@@ -16,14 +16,15 @@ namespace ShibaNetLib {
 	public:
 		using NetworkChannel::NetworkChannel;
 		void Incoming(char* newData) {
-			if (isServer) {
+			std::cout << conn->isServer << std::endl;
+			if (conn->isServer) {
 				ClientConnectMessage* message = (ClientConnectMessage*)newData;
 
 				ClientConnectCallbackMessage callbackMessage;
 				callbackMessage.channelid = 2;
 				callbackMessage.senderid = conn->netId;
-				callbackMessage.newNetId = ++NetworkStats::clientCount;
-				callbackMessage.clientCount = NetworkStats::clientCount;
+				callbackMessage.newNetId = Network::clientCount++;
+				callbackMessage.clientCount = Network::clientCount;
 
 				conn->Send(&callbackMessage, sizeof(ClientConnectCallbackMessage));
 			}
@@ -34,9 +35,9 @@ namespace ShibaNetLib {
 		void Incoming(char* newData) {
 			ClientConnectCallbackMessage* message = (ClientConnectCallbackMessage*)newData;
 			conn->netId = message->newNetId;
-			NetworkStats::clientCount = message->clientCount;
+			Network::clientCount = message->clientCount;
 			std::cout << "successfully joined server - id: " << message->newNetId << std::endl;;
-			NetworkStats::state = NetworkState::netstate_connected;
+			Network::state = NetworkState::netstate_connected;
 		}
 	};
 }

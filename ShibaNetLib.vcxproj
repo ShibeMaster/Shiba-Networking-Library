@@ -144,28 +144,25 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ChannelCreationQueue.h" />
-    <ClInclude Include="ClientConnection.h" />
-    <ClInclude Include="ClientConnectionChannel.h" />
+    <ClInclude Include="DefaultNetworkChannels.h" />
     <ClInclude Include="Event.h" />
-    <ClInclude Include="HostConnection.h" />
     <ClInclude Include="NetworkBehaviour.h" />
     <ClInclude Include="NetworkChannel.h" />
     <ClInclude Include="NetworkChannelManager.h" />
     <ClInclude Include="NetworkConnection.h" />
     <ClInclude Include="NetworkDataQueues.h" />
+    <ClInclude Include="NetworkException.h" />
     <ClInclude Include="NetworkManager.h" />
     <ClInclude Include="NetworkMessage.h" />
-    <ClInclude Include="NetworkStats.h" />
+    <ClInclude Include="Network.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChannelCreationQueue.cpp" />
-    <ClCompile Include="ClientConnection.cpp" />
-    <ClCompile Include="HostConnection.cpp" />
     <ClCompile Include="NetworkChannelManager.cpp" />
     <ClCompile Include="NetworkConnection.cpp" />
     <ClCompile Include="NetworkDataQueue.cpp" />
     <ClCompile Include="NetworkManager.cpp" />
-    <ClCompile Include="NetworkStats.cpp" />
+    <ClCompile Include="Network.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
