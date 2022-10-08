@@ -22,7 +22,7 @@ namespace ShibaNetLib {
 
 			while (true) {
 				while (!ChannelCreationQueue::newChannelQueue.empty()) {
-					NetworkChannel* channel = ChannelCreationQueue::newChannelQueue.top();
+					NetworkChannel* channel = ChannelCreationQueue::newChannelQueue.back();
 					if (channels.find(channel->channelIndex) != channels.end()) {
 						if (channels[channel->channelIndex]->enabled) {
 							std::cout << "a channel already exists on this index, try another!" << std::endl;
@@ -31,23 +31,23 @@ namespace ShibaNetLib {
 					}
 
 					channels[channel->channelIndex] = channel;
-					ChannelCreationQueue::newChannelQueue.pop();
+					ChannelCreationQueue::newChannelQueue.pop_back();
 				}
 				while (!NetworkDataQueues::dataQueue.empty() && ChannelCreationQueue::newChannelQueue.empty()) {
-					char* data = NetworkDataQueues::dataQueue.top();
+					char* data = NetworkDataQueues::dataQueue.back();
 					NetworkMessage* message = (NetworkMessage*)data;
 					if (channels.find(message->channelid) == channels.end()) {
 						std::cout << "received invalid channel id: " << message->channelid << std::endl;
-						return;
+						continue;
 					}
 
 					channels[message->channelid]->Incoming(data);
-					NetworkDataQueues::dataQueue.pop();
+					NetworkDataQueues::dataQueue.pop_back();
 				}
 			}
 		}
 		static void AddNetworkChannel(NetworkChannel* channel) {
-			ChannelCreationQueue::newChannelQueue.push(channel);
+			ChannelCreationQueue::newChannelQueue.push_front(channel);
 		}
 		static void RemoveNetworkChannel(int index) {
 			if (channels.find(index) == channels.end()) {

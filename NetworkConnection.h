@@ -5,8 +5,10 @@
 #include <WinSock2.h>
 #include "NetworkMessage.h"
 #include "NetworkDataQueues.h"
+#include <deque>
+#include <thread>
 
-#define DEFAULT_BUFFER_LENGTH 512
+#define DEFAULT_BUFFER_LENGTH 8192
 
 namespace ShibaNetLib {
 	class NetworkConnection {
@@ -15,8 +17,10 @@ namespace ShibaNetLib {
 		unsigned int netId;
 		bool isServer;
 		char buffer[DEFAULT_BUFFER_LENGTH];
+		bool showDebugMessages = false;
 
 		void Send(NetworkMessage* message, int size = DEFAULT_BUFFER_LENGTH);
+		void SendThread();
 		void Receive();
 	};
 }

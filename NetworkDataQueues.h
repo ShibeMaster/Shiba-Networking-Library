@@ -1,9 +1,9 @@
 #pragma once
-#include <stack>
+#include <deque>
 
 namespace ShibaNetLib {
 	class NetworkDataQueues {
 	public:
-		static std::stack<char*> dataQueue;
+		static std::deque<char*> dataQueue;
 	};
 }

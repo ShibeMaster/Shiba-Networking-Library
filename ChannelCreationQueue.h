@@ -4,6 +4,6 @@
 namespace ShibaNetLib {
 	class ChannelCreationQueue {
 	public:
-		static std::stack<NetworkChannel*> newChannelQueue;
+		static std::deque<NetworkChannel*> newChannelQueue;
 	};
 }

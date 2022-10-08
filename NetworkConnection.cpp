@@ -9,17 +9,22 @@ namespace ShibaNetLib {
 			WSACleanup();
 			return;
 		}
+		else if(showDebugMessages) {
+			std::cout << "bytes sent: " << result << std::endl;
+		}
 	}
 	void NetworkConnection::Receive() {
 		int receivingResult = 1;
 		while (receivingResult > 0) {
 			int result = recv(connection, buffer, DEFAULT_BUFFER_LENGTH, 0);
 			if (result > 0) {
-				std::cout << "bytes received: " << result << std::endl;
-				NetworkDataQueues::dataQueue.push(buffer);
+				if(showDebugMessages)
+					std::cout << "bytes received: " << result << std::endl;
+				NetworkDataQueues::dataQueue.push_front(buffer);
 			}
 		}
-		std::cout << "connection ended" << std::endl;
+		if (showDebugMessages)
+			std::cout << "connection ended" << std::endl;
 
 	}
 }

@@ -1,4 +1,4 @@
 #include "ChannelCreationQueue.h"
 namespace ShibaNetLib {
-	std::stack<NetworkChannel*> ChannelCreationQueue::newChannelQueue;
+	std::deque<NetworkChannel*> ChannelCreationQueue::newChannelQueue;
 }
