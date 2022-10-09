@@ -1,5 +1,6 @@
 #include "NetworkManager.h"
 #include "NetworkException.h"
+#include "NetworkEvents.h"
 
 namespace ShibaNetLib {
 	WSAData NetworkManager::wsaData;
@@ -64,6 +65,7 @@ namespace ShibaNetLib {
 		Network::conn.isServer = true;
 		Network::clientCount = 1;
 		Network::state = NetworkState::netstate_connected;
+		NetworkEvents::OnServerStart.Invoke(Network::conn.netId);
 		Network::conn.Receive();
 	}
 	void NetworkManager::StartClient() {

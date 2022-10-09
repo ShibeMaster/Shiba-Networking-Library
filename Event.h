@@ -3,7 +3,7 @@
 #include <functional>
 
 namespace ShibaNetLib {
-	template<class T>
+	template<typename T>
 	class Event {
 	public:
 		std::vector<std::function<void(T)>> subscribers;

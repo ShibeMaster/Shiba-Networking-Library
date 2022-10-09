@@ -2,6 +2,7 @@
 #include "NetworkChannel.h"
 #include "NetworkMessage.h"
 #include "Network.h"
+#include "NetworkEvents.h"
 
 namespace ShibaNetLib {
 
@@ -27,6 +28,7 @@ namespace ShibaNetLib {
 				callbackMessage.clientCount = Network::clientCount;
 
 				std::cout << "New client connected to server - id: " << callbackMessage.newNetId << std::endl;;
+				NetworkEvents::OnClientJoin.Invoke(callbackMessage.newNetId);
 				conn->Send(&callbackMessage, sizeof(ClientConnectReplyMessage));
 			}
 		}
@@ -34,8 +36,9 @@ namespace ShibaNetLib {
 			ClientConnectReplyMessage* message = (ClientConnectReplyMessage*)buffer;
 			conn->netId = message->newNetId;
 			Network::clientCount = message->clientCount;
-			std::cout << "Successfully joined server - id: " << message->newNetId << std::endl;;
+			std::cout << "Successfully joined server - id: " << message->newNetId << std::endl;
 			Network::state = NetworkState::netstate_connected;
+			NetworkEvents::OnClientStart.Invoke(conn->netId);
 		}
 	};
 }

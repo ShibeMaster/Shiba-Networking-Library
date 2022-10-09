@@ -26,5 +26,7 @@ namespace ShibaNetLib {
 		if (showDebugMessages)
 			std::cout << "connection ended" << std::endl;
 
+		NetworkEvents::OnConnectionEnded.Invoke(receivingResult);
+
 	}
 }

@@ -6,6 +6,7 @@
 #include "NetworkMessage.h"
 #include "NetworkDataQueues.h"
 #include <deque>
+#include "NetworkEvents.h"
 #include <thread>
 
 #define DEFAULT_BUFFER_LENGTH 8192
