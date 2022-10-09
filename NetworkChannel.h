@@ -11,5 +11,6 @@ namespace ShibaNetLib {
 			channelIndex = index;
 		}
 		virtual void Incoming(char* buffer){}
+		virtual void IncomingReply(char* buffer){}
 	};
 }

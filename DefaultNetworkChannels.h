@@ -7,7 +7,7 @@ namespace ShibaNetLib {
 
 	struct ClientConnectMessage : NetworkMessage {};
 
-	struct ClientConnectCallbackMessage : NetworkMessage {
+	struct ClientConnectReplyMessage : NetworkMessage {
 		int newNetId;
 		int clientCount;
 	};
@@ -15,28 +15,26 @@ namespace ShibaNetLib {
 	class ClientConnectionChannel : public NetworkChannel {
 	public:
 		using NetworkChannel::NetworkChannel;
-		void Incoming(char* newData) {
-			std::cout << conn->isServer << std::endl;
+		void Incoming(char* buffer) {
 			if (conn->isServer) {
-				ClientConnectMessage* message = (ClientConnectMessage*)newData;
+				ClientConnectMessage* message = (ClientConnectMessage*)buffer;
 
-				ClientConnectCallbackMessage callbackMessage;
-				callbackMessage.channelid = 2;
+				ClientConnectReplyMessage callbackMessage;
+				callbackMessage.channelid = 1;
 				callbackMessage.senderid = conn->netId;
+				callbackMessage.response = true;
 				callbackMessage.newNetId = Network::clientCount++;
 				callbackMessage.clientCount = Network::clientCount;
 
-				conn->Send(&callbackMessage, sizeof(ClientConnectCallbackMessage));
+				std::cout << "New client connected to server - id: " << callbackMessage.newNetId << std::endl;;
+				conn->Send(&callbackMessage, sizeof(ClientConnectReplyMessage));
 			}
 		}
-	};
-	class ClientConnectCallbackChannel : public NetworkChannel {
-		using NetworkChannel::NetworkChannel;
-		void Incoming(char* newData) {
-			ClientConnectCallbackMessage* message = (ClientConnectCallbackMessage*)newData;
+		void IncomingReply(char* buffer) {
+			ClientConnectReplyMessage* message = (ClientConnectReplyMessage*)buffer;
 			conn->netId = message->newNetId;
 			Network::clientCount = message->clientCount;
-			std::cout << "successfully joined server - id: " << message->newNetId << std::endl;;
+			std::cout << "Successfully joined server - id: " << message->newNetId << std::endl;;
 			Network::state = NetworkState::netstate_connected;
 		}
 	};

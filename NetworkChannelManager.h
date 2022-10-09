@@ -14,11 +14,9 @@ namespace ShibaNetLib {
 
 
 			ClientConnectionChannel clientConnection = ClientConnectionChannel(1);
-			ClientConnectCallbackChannel clientConnectionCallback = ClientConnectCallbackChannel(2);
 
 
 			AddNetworkChannel(&clientConnection);
-			AddNetworkChannel(&clientConnectionCallback);
 
 			while (true) {
 				while (!ChannelCreationQueue::newChannelQueue.empty()) {
@@ -41,7 +39,8 @@ namespace ShibaNetLib {
 						continue;
 					}
 
-					channels[message->channelid]->Incoming(data);
+					if(message->response) channels[message->channelid]->IncomingReply(data);
+					else channels[message->channelid]->Incoming(data);
 					NetworkDataQueues::dataQueue.pop_back();
 				}
 			}

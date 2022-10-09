@@ -115,6 +115,7 @@ namespace ShibaNetLib {
 		ClientConnectMessage connectMessage;
 		connectMessage.channelid = 1;
 		connectMessage.senderid = 0;
+		connectMessage.response = false;
 
 		Network::conn.Send(&connectMessage, sizeof(ClientConnectMessage));
 		Network::conn.Receive();
